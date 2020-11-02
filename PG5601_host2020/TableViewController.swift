@@ -9,17 +9,28 @@
 import UIKit
 import Foundation
 
-class TableViewController: UITableViewController {
+class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
-    @IBOutlet var weatherTable: UITableView!
+    @IBOutlet weak var weatherTable: UITableView!
     
-    var temperatureNow : Double = 666
     var weatherDataList : [WeatherInformation] = []
+    
+    let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.weatherTable.rowHeight = 125
+        
+        self.weatherTable.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.weatherTable.delegate = self
+        self.weatherTable.dataSource = self
+        
+        self.weatherTable.rowHeight = 100
+        self.weatherTable.sectionHeaderHeight = 75
+        self.weatherTable.sectionFooterHeight = 75
+        
+        self.weatherTable.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+
         makeRequest()
     }
 
@@ -43,19 +54,31 @@ class TableViewController: UITableViewController {
         weatherDataList.append(WeatherInformation(title: "Next Twelve hours", informationLable: "Weather", datafield_0: "" , datafield_1: weatherData.next12_Hours?.summary.symbolCode ?? "SORRY MAC"))
     }
     
+    func tableView(_ tableView: UITableView,
+        viewForHeaderInSection section: Int) -> UIView? {
+        let view = self.weatherTable.dequeueReusableHeaderFooterView(withIdentifier:
+                   "sectionHeader") as! MainMenuHeader
+       view.title.text = "Weather forecast for HK"
+
+       return view
+    }
     
+    func tableView(_ tableView: UITableView, titleForFooterInSection
+                                section: Int) -> String? {
+       return "Footer \(section)"
+    }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
            // #warning Incomplete implementation, return the number of sections
            return 1
        }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weatherDataList.count
         
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherInformationCell", for: indexPath) as! WeatherInfromationCell
         
         let weatherInformation = weatherDataList[indexPath.row]
@@ -66,7 +89,7 @@ class TableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 }

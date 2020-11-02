@@ -18,6 +18,9 @@
 		AFBF376B254EEC5E007EF87F /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF376A254EEC5E007EF87F /* DataObjects.swift */; };
 		AFBF376D254F1625007EF87F /* WeatherInformatinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF376C254F1625007EF87F /* WeatherInformatinCell.swift */; };
 		AFBF3770254F3965007EF87F /* WeatherInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF376F254F3965007EF87F /* WeatherInformation.swift */; };
+		AFBF377325506990007EF87F /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377225506990007EF87F /* MainMenuHeader.swift */; };
+		AFBF377525506CD4007EF87F /* MainMenuFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377425506CD4007EF87F /* MainMenuFooter.swift */; };
+		AFBF377725507958007EF87F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377625507958007EF87F /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		AFBF376A254EEC5E007EF87F /* DataObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
 		AFBF376C254F1625007EF87F /* WeatherInformatinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInformatinCell.swift; sourceTree = "<group>"; };
 		AFBF376F254F3965007EF87F /* WeatherInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInformation.swift; sourceTree = "<group>"; };
+		AFBF377225506990007EF87F /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
+		AFBF377425506CD4007EF87F /* MainMenuFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuFooter.swift; sourceTree = "<group>"; };
+		AFBF377625507958007EF87F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CDB9152A47B3E53F3151F654 /* Pods-PG5601_host2020.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PG5601_host2020.debug.xcconfig"; path = "Target Support Files/Pods-PG5601_host2020/Pods-PG5601_host2020.debug.xcconfig"; sourceTree = "<group>"; };
 		D97E9969138E6609E82BBA59 /* Pods_PG5601_host2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PG5601_host2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -79,6 +85,7 @@
 		AFBF3753254EE671007EF87F /* PG5601_host2020 */ = {
 			isa = PBXGroup;
 			children = (
+				AFBF37712550695E007EF87F /* UiElements */,
 				AFBF3754254EE671007EF87F /* AppDelegate.swift */,
 				AFBF3756254EE671007EF87F /* SceneDelegate.swift */,
 				AFBF3758254EE671007EF87F /* TableViewController.swift */,
@@ -89,6 +96,7 @@
 				AFBF3768254EE7FB007EF87F /* RequestHandler.swift */,
 				AFBF376A254EEC5E007EF87F /* DataObjects.swift */,
 				AFBF376E254F38BB007EF87F /* WeatherInformation */,
+				AFBF377625507958007EF87F /* MapViewController.swift */,
 			);
 			path = PG5601_host2020;
 			sourceTree = "<group>";
@@ -100,6 +108,15 @@
 				AFBF376F254F3965007EF87F /* WeatherInformation.swift */,
 			);
 			path = WeatherInformation;
+			sourceTree = "<group>";
+		};
+		AFBF37712550695E007EF87F /* UiElements */ = {
+			isa = PBXGroup;
+			children = (
+				AFBF377225506990007EF87F /* MainMenuHeader.swift */,
+				AFBF377425506CD4007EF87F /* MainMenuFooter.swift */,
+			);
+			path = UiElements;
 			sourceTree = "<group>";
 		};
 		D38DE6BD1F4B32CD927436BE /* Pods */ = {
@@ -228,7 +245,10 @@
 			files = (
 				AFBF3759254EE671007EF87F /* TableViewController.swift in Sources */,
 				AFBF376B254EEC5E007EF87F /* DataObjects.swift in Sources */,
+				AFBF377325506990007EF87F /* MainMenuHeader.swift in Sources */,
+				AFBF377725507958007EF87F /* MapViewController.swift in Sources */,
 				AFBF3770254F3965007EF87F /* WeatherInformation.swift in Sources */,
+				AFBF377525506CD4007EF87F /* MainMenuFooter.swift in Sources */,
 				AFBF3755254EE671007EF87F /* AppDelegate.swift in Sources */,
 				AFBF3769254EE7FB007EF87F /* RequestHandler.swift in Sources */,
 				AFBF3757254EE671007EF87F /* SceneDelegate.swift in Sources */,
