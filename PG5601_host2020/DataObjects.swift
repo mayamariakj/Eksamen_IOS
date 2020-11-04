@@ -6,6 +6,17 @@
 //  Copyright © 2020 Maya maria Kjær. All rights reserved.
 //
 import Foundation
+import CoreLocation
+
+var myLocationLong : String = "10.744810"
+var myLocationLat : String = "59.911166"
+var myLocationName : String = "Høyskolen Kristiania"
+
+func setWeatherCoordinates(latitude:CLLocationDegrees, longitude:CLLocationDegrees){
+    myLocationLong = String(longitude)
+    myLocationLat = String(latitude)
+    myLocationName = myLocationLat + ", " + myLocationLong
+}
 
 // MARK: - Welcome
 struct Welcome: Codable {

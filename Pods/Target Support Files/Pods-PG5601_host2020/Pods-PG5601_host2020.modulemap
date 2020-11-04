@@ -1,0 +1,6 @@
+framework module Pods_PG5601_host2020 {
+  umbrella header "Pods-PG5601_host2020-umbrella.h"
+
+  export *
+  module * { export * }
+}

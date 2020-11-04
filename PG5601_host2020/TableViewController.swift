@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 
+
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
@@ -27,17 +28,24 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.weatherTable.rowHeight = 100
         self.weatherTable.sectionHeaderHeight = 75
-        self.weatherTable.sectionFooterHeight = 75
         
         self.weatherTable.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // F I X !! maybe change to an dictinonary :)
+        weatherDataList.removeAll()
         makeRequest()
     }
-
+    
     func makeRequest() {
+    
+        let weatherUrl : String =  "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=\(myLocationLat)&lon=\(myLocationLong)"
+        
         RequestHandler().requestWeaterData(
-        url: "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=59.911166&lon=10.744810",
-        completed: {(response: Welcome?) in guard let weatherData = response?.properties.timeseries[0].data else {
+            url: weatherUrl,
+            completed: {(response: Welcome?) in guard let weatherData = response?.properties.timeseries[0].data else {
                 return;
             }
             
@@ -54,18 +62,14 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         weatherDataList.append(WeatherInformation(title: "Next Twelve hours", informationLable: "Weather", datafield_0: "" , datafield_1: weatherData.next12_Hours?.summary.symbolCode ?? "SORRY MAC"))
     }
     
-    func tableView(_ tableView: UITableView,
-        viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
         let view = self.weatherTable.dequeueReusableHeaderFooterView(withIdentifier:
                    "sectionHeader") as! MainMenuHeader
-       view.title.text = "Weather forecast for HK"
+        view.title.text = "Weather forecast for"
+        view.subtitle.text = myLocationName
 
        return view
-    }
-    
-    func tableView(_ tableView: UITableView, titleForFooterInSection
-                                section: Int) -> String? {
-       return "Footer \(section)"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -92,6 +96,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
+    
 }
 
 

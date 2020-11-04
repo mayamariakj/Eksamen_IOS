@@ -84,18 +84,82 @@
         <!--Home-->
         <scene sceneID="Ong-ya-VqR">
             <objects>
-                <viewController id="sfm-uN-MXU" sceneMemberID="viewController">
+                <viewController id="sfm-uN-MXU" customClass="HomeViewController" customModule="PG5601_host2020" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DjZ-PJ-T2U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AQn-i1-1z1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeCell" rowHeight="117" id="gHO-6V-5se" customClass="HomeCell" customModule="PG5601_host2020" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="117"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gHO-6V-5se" id="HMq-0o-Ukt">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74v-4A-XCD">
+                                                    <rect key="frame" x="20" y="11" width="374" height="95"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="74v-4A-XCD" firstAttribute="leading" secondItem="HMq-0o-Ukt" secondAttribute="leadingMargin" id="3M5-c8-1vs"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="74v-4A-XCD" secondAttribute="trailing" id="RnG-hI-Oom"/>
+                                                <constraint firstItem="74v-4A-XCD" firstAttribute="top" secondItem="HMq-0o-Ukt" secondAttribute="topMargin" id="ZCT-8e-1MR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="74v-4A-XCD" secondAttribute="bottom" id="s5C-cg-8gs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="homeLabel" destination="74v-4A-XCD" id="NmO-TG-JD7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeImageCell" rowHeight="127" id="BWG-c7-fZS" customClass="HomeCell" customModule="PG5601_host2020" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="145" width="414" height="127"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BWG-c7-fZS" id="bGk-9N-ybm">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-mr-KlH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="3kF-mr-KlH" secondAttribute="trailing" id="DjG-I3-aNV"/>
+                                                <constraint firstItem="3kF-mr-KlH" firstAttribute="top" secondItem="bGk-9N-ybm" secondAttribute="top" id="cUL-rA-Ate"/>
+                                                <constraint firstItem="3kF-mr-KlH" firstAttribute="leading" secondItem="bGk-9N-ybm" secondAttribute="leading" id="dcg-Gz-Wkz"/>
+                                                <constraint firstAttribute="bottom" secondItem="3kF-mr-KlH" secondAttribute="bottom" id="hKQ-4o-ews"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="weatherImage" destination="3kF-mr-KlH" id="Psg-Js-w6f"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fbP-2B-b79" firstAttribute="bottom" secondItem="AQn-i1-1z1" secondAttribute="bottom" id="4dl-Np-aRz"/>
+                            <constraint firstItem="AQn-i1-1z1" firstAttribute="top" secondItem="fbP-2B-b79" secondAttribute="top" id="Kqq-r8-cjy"/>
+                            <constraint firstItem="fbP-2B-b79" firstAttribute="trailing" secondItem="AQn-i1-1z1" secondAttribute="trailing" id="Qtx-dS-EEs"/>
+                            <constraint firstItem="AQn-i1-1z1" firstAttribute="leading" secondItem="fbP-2B-b79" secondAttribute="leading" id="Y9g-es-Qc8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fbP-2B-b79"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="6yH-Qd-NMz" userLabel="Home"/>
+                    <connections>
+                        <outlet property="homeTable" destination="AQn-i1-1z1" id="Yli-KS-a8b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u20-G6-Z0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="338" y="-557"/>
+            <point key="canvasLocation" x="337.68115942028987" y="-557.14285714285711"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aOj-Co-gTx">

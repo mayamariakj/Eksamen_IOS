@@ -11,6 +11,7 @@ import UIKit
 
 class MainMenuHeader: UITableViewHeaderFooterView {
     let title = UILabel()
+    let subtitle = UILabel()
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -23,15 +24,21 @@ class MainMenuHeader: UITableViewHeaderFooterView {
         
     func configureContents() {
         title.translatesAutoresizingMaskIntoConstraints = false
+        subtitle.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(title)
+        contentView.addSubview(subtitle)
+
 
        
         NSLayoutConstraint.activate([
            
             title.heightAnchor.constraint(equalToConstant: 30),
             title.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            title.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            title.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            subtitle.heightAnchor.constraint(equalToConstant: 30),
+            subtitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor)
 
         ])
     }
