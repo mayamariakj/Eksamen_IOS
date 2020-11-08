@@ -21,7 +21,8 @@
 		AFBF377325506990007EF87F /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377225506990007EF87F /* MainMenuHeader.swift */; };
 		AFBF377725507958007EF87F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377625507958007EF87F /* MapViewController.swift */; };
 		AFBF377925532F04007EF87F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377825532F04007EF87F /* HomeViewController.swift */; };
-		AFBF377B255333C8007EF87F /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377A255333C8007EF87F /* HomeCell.swift */; };
+		AFBF377B255333C8007EF87F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377A255333C8007EF87F /* HomeView.swift */; };
+		AFC76AB7255810CD00F2FA42 /* weathericon in Resources */ = {isa = PBXBuildFile; fileRef = AFC76AB6255810CD00F2FA42 /* weathericon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +42,8 @@
 		AFBF377225506990007EF87F /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
 		AFBF377625507958007EF87F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AFBF377825532F04007EF87F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		AFBF377A255333C8007EF87F /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		AFBF377A255333C8007EF87F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AFC76AB6255810CD00F2FA42 /* weathericon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weathericon; sourceTree = SOURCE_ROOT; };
 		CDB9152A47B3E53F3151F654 /* Pods-PG5601_host2020.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PG5601_host2020.debug.xcconfig"; path = "Target Support Files/Pods-PG5601_host2020/Pods-PG5601_host2020.debug.xcconfig"; sourceTree = "<group>"; };
 		D97E9969138E6609E82BBA59 /* Pods_PG5601_host2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PG5601_host2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -87,39 +89,56 @@
 		AFBF3753254EE671007EF87F /* PG5601_host2020 */ = {
 			isa = PBXGroup;
 			children = (
-				AFBF37712550695E007EF87F /* UiElements */,
+				AFC76ABA25583FE100F2FA42 /* Common */,
+				AFC76AB925583F5D00F2FA42 /* Forecast */,
+				AFC76AB825583F4C00F2FA42 /* Home */,
+				AFC76AB6255810CD00F2FA42 /* weathericon */,
 				AFBF3754254EE671007EF87F /* AppDelegate.swift */,
 				AFBF3756254EE671007EF87F /* SceneDelegate.swift */,
-				AFBF3758254EE671007EF87F /* TableViewController.swift */,
 				AFBF375A254EE671007EF87F /* Main.storyboard */,
 				AFBF375D254EE672007EF87F /* Assets.xcassets */,
 				AFBF375F254EE672007EF87F /* LaunchScreen.storyboard */,
 				AFBF3762254EE672007EF87F /* Info.plist */,
-				AFBF3768254EE7FB007EF87F /* RequestHandler.swift */,
-				AFBF376A254EEC5E007EF87F /* DataObjects.swift */,
-				AFBF376E254F38BB007EF87F /* WeatherInformation */,
-				AFBF377625507958007EF87F /* MapViewController.swift */,
-				AFBF377825532F04007EF87F /* HomeViewController.swift */,
+				AFBF376E254F38BB007EF87F /* Map */,
 			);
 			path = PG5601_host2020;
 			sourceTree = "<group>";
 		};
-		AFBF376E254F38BB007EF87F /* WeatherInformation */ = {
+		AFBF376E254F38BB007EF87F /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				AFBF377625507958007EF87F /* MapViewController.swift */,
+				AFBF376F254F3965007EF87F /* WeatherInformation.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		AFC76AB825583F4C00F2FA42 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AFBF377825532F04007EF87F /* HomeViewController.swift */,
+				AFBF377A255333C8007EF87F /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AFC76AB925583F5D00F2FA42 /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
 				AFBF376C254F1625007EF87F /* WeatherInformatinCell.swift */,
-				AFBF376F254F3965007EF87F /* WeatherInformation.swift */,
+				AFBF3758254EE671007EF87F /* TableViewController.swift */,
+				AFBF377225506990007EF87F /* MainMenuHeader.swift */,
 			);
-			path = WeatherInformation;
+			path = Forecast;
 			sourceTree = "<group>";
 		};
-		AFBF37712550695E007EF87F /* UiElements */ = {
+		AFC76ABA25583FE100F2FA42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				AFBF377225506990007EF87F /* MainMenuHeader.swift */,
-				AFBF377A255333C8007EF87F /* HomeCell.swift */,
+				AFBF376A254EEC5E007EF87F /* DataObjects.swift */,
+				AFBF3768254EE7FB007EF87F /* RequestHandler.swift */,
 			);
-			path = UiElements;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D38DE6BD1F4B32CD927436BE /* Pods */ = {
@@ -191,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC76AB7255810CD00F2FA42 /* weathericon in Resources */,
 				AFBF3761254EE672007EF87F /* LaunchScreen.storyboard in Resources */,
 				AFBF375E254EE672007EF87F /* Assets.xcassets in Resources */,
 				AFBF375C254EE671007EF87F /* Main.storyboard in Resources */,
@@ -249,7 +269,7 @@
 				AFBF3759254EE671007EF87F /* TableViewController.swift in Sources */,
 				AFBF376B254EEC5E007EF87F /* DataObjects.swift in Sources */,
 				AFBF377325506990007EF87F /* MainMenuHeader.swift in Sources */,
-				AFBF377B255333C8007EF87F /* HomeCell.swift in Sources */,
+				AFBF377B255333C8007EF87F /* HomeView.swift in Sources */,
 				AFBF377925532F04007EF87F /* HomeViewController.swift in Sources */,
 				AFBF377725507958007EF87F /* MapViewController.swift in Sources */,
 				AFBF3770254F3965007EF87F /* WeatherInformation.swift in Sources */,
