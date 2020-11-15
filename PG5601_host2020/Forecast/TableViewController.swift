@@ -19,8 +19,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     let cellReuseIdentifier = "cell"
     
+    let metRequest = MetRequest()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        metRequest.delegate = self
         
         self.weatherTable.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.weatherTable.delegate = self
@@ -36,23 +40,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         // F I X !! maybe change to an dictinonary :)
         weatherDataList.removeAll()
-        makeRequest()
-    }
-    
-    func makeRequest() {
-    
-        let weatherUrl : String =  "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=\(myLocationLat)&lon=\(myLocationLong)"
-        
-        RequestHandler().requestWeaterData(
-            url: weatherUrl,
-            completed: {(response: Welcome?) in guard let weatherData = response?.properties.timeseries[0].data else {
-                return;
-            }
-            
-            self.formatWeatherData(weatherData: weatherData)
-            self.weatherTable.reloadData()
-            print("finished")
-        })
+        metRequest.getWeatherDataFromMet(lat: myLocationLat,lon: myLocationLong)
     }
     
     func formatWeatherData(weatherData :DataClass){
@@ -97,8 +85,18 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return false
     }
     
+    
 }
 
-
+extension TableViewController: MetRequestDelegate {
+    func didGetWeatherData(_ response: MetWeatherObject) {
+        
+        let weatherData = response.properties.timeseries[0].data
+        self.formatWeatherData(weatherData: weatherData)
+        DispatchQueue.main.async {
+            self.weatherTable.reloadData()
+        }
+    }
+}
 
 

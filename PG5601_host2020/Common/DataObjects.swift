@@ -8,18 +8,18 @@
 import Foundation
 import CoreLocation
 
-var myLocationLong : String = "10.744810"
-var myLocationLat : String = "59.911166"
+var myLocationLong : Double = 10.744810
+var myLocationLat : Double = 59.911166
 var myLocationName : String = "Høyskolen Kristiania"
 
 func setWeatherCoordinates(latitude:CLLocationDegrees, longitude:CLLocationDegrees){
-    myLocationLong = String(longitude)
-    myLocationLat = String(latitude)
-    myLocationName = myLocationLat + ", " + myLocationLong
+    myLocationLong = longitude
+    myLocationLat = latitude
+    myLocationName = String(myLocationLat) + ", " + String(myLocationLong)
 }
 
 // MARK: - Welcome
-struct Welcome: Codable {
+struct MetWeatherObject: Codable {
    let type: String
    let properties: Properties
 }

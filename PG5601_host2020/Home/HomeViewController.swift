@@ -63,12 +63,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     }
     
     func makeRequest() {
-    
+    /*
         let weatherUrl : String =  "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=\(currentLocationStrLat)&lon=\(currentLocationStrLon)"
         
         RequestHandler().requestWeaterData(
             url: weatherUrl,
-            completed: {(response: Welcome?) in guard let weatherData = response?.properties.timeseries[0].data else {
+            completed: {(response: MetWeatherObject?) in guard let weatherData = response?.properties.timeseries[0].data else {
                 return;
             }
             
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
 
             print("finished")
         })
-        
+        */
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -109,8 +109,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
      
      func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
          let mUserLocation:CLLocation = locations[0] as CLLocation
-        currentLocationStrLat = String(mUserLocation.coordinate.latitude)
-        currentLocationStrLon = String(mUserLocation.coordinate.longitude)
+        currentLocationStrLat = mUserLocation.coordinate.latitude
+        currentLocationStrLon = mUserLocation.coordinate.longitude
 
       
      }

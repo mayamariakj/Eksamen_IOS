@@ -13,12 +13,16 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
-    @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager!
     var currentLocationStr = "Current location"
     
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapInformationView: MapInformationView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +52,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //set The Coordinats For weather screen.
         setWeatherCoordinates(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
+        
+        self.mapInformationView.latitudeData.text = String(mUserLocation.coordinate.latitude)
+        self.mapInformationView.longitudeData.text = String(mUserLocation.coordinate.longitude)
+        self.mapInformationView.weatherImage.image = UIImage(named: "clearsky_day")
 
         // Get user's Current Location and Drop a pin
         let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
