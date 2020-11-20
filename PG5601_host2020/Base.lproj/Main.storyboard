@@ -212,14 +212,19 @@
                                 <rect key="frame" x="0.0" y="625" width="414" height="188"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MKM-VU-OnQ">
+                                <rect key="frame" x="345" y="64" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6AY-FH-SAN" firstAttribute="leading" secondItem="UIi-3t-1qb" secondAttribute="leading" id="C5e-8E-di8"/>
+                            <constraint firstItem="MKM-VU-OnQ" firstAttribute="top" secondItem="UIi-3t-1qb" secondAttribute="top" constant="20" id="Kfk-G3-CR0"/>
                             <constraint firstItem="ONA-oz-k4v" firstAttribute="top" secondItem="6AY-FH-SAN" secondAttribute="bottom" id="M9n-n2-Q0e"/>
                             <constraint firstItem="6AY-FH-SAN" firstAttribute="trailing" secondItem="UIi-3t-1qb" secondAttribute="trailing" id="QWU-5g-VOZ"/>
                             <constraint firstItem="UIi-3t-1qb" firstAttribute="trailing" secondItem="ONA-oz-k4v" secondAttribute="trailing" id="VrQ-V5-h56"/>
                             <constraint firstItem="ONA-oz-k4v" firstAttribute="leading" secondItem="UIi-3t-1qb" secondAttribute="leading" id="eDz-zJ-Vcg"/>
+                            <constraint firstItem="UIi-3t-1qb" firstAttribute="trailing" secondItem="MKM-VU-OnQ" secondAttribute="trailing" constant="20" id="fLy-qg-hCp"/>
                             <constraint firstItem="6AY-FH-SAN" firstAttribute="top" secondItem="YL0-V5-TnB" secondAttribute="top" id="nzG-Ia-7hL"/>
                             <constraint firstItem="UIi-3t-1qb" firstAttribute="bottom" secondItem="ONA-oz-k4v" secondAttribute="bottom" id="rRL-DQ-z9A"/>
                         </constraints>
@@ -230,6 +235,7 @@
                     <connections>
                         <outlet property="mapInformationView" destination="ONA-oz-k4v" id="gVJ-pa-p67"/>
                         <outlet property="mapView" destination="6AY-FH-SAN" id="0q2-vK-YZb"/>
+                        <outlet property="userPinSwitch" destination="MKM-VU-OnQ" id="bgi-U2-eMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TvZ-rL-epf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
