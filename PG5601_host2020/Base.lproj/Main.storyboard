@@ -84,7 +84,7 @@
         <!--Home-->
         <scene sceneID="pTu-7Z-MiC">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="CCC-yI-iSz" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CCC-yI-iSz" customClass="HomePageViewController" customModule="PG5601_host2020" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="H9M-1c-eaV" userLabel="Home"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -98,7 +98,7 @@
         <!--Home View Controller-->
         <scene sceneID="Ong-ya-VqR">
             <objects>
-                <viewController id="sfm-uN-MXU" customClass="HomeViewController" customModule="PG5601_host2020" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="sfm-uN-MXU" customClass="HomeViewController" customModule="PG5601_host2020" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DjZ-PJ-T2U" customClass="HomeView" customModule="PG5601_host2020" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

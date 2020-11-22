@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class MapInformationView: UIView {
+    
+    let metRequest = MetRequest()
 
     lazy var latitudeText: UILabel = {
         let latitudeText = UILabel()
@@ -61,6 +63,9 @@ class MapInformationView: UIView {
     }
     
     private func setupView(){
+        
+        metRequest.delegate = self
+
         addSubview(latitudeText)
         addSubview(latitudeData)
         addSubview(longitudeText)
@@ -105,3 +110,15 @@ class MapInformationView: UIView {
     }
 }
 
+extension MapInformationView: MetRequestDelegate {
+    func didGetWeatherData(_ response: MetWeatherObject) {
+        let symbol = response.properties.timeseries[0].data.next1_Hours?.summary.symbolCode
+        DispatchQueue.main.async {
+            self.weatherImage.image = UIImage(named: symbol!)
+        }
+    }
+    
+    func getNewWeatherData(lat: Double, lon: Double){
+        metRequest.getWeatherDataFromMet(lat: lat, lon: lon)
+    }
+}

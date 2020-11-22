@@ -68,23 +68,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
         currentLocation = center
         //set The Coordinats For weather screen.
         setWeatherCoordinates(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
-        
-        self.mapInformationView.latitudeData.text = String(mUserLocation.coordinate.latitude)
-        self.mapInformationView.longitudeData.text = String(mUserLocation.coordinate.longitude)
-        self.mapInformationView.weatherImage.image = UIImage(named: "clearsky_day")
-        
-        // Get user's Current Location and Drop a pin
-       
     }
     
     func centerUserOnLocationAndAddPin(location: CLLocationCoordinate2D){
         let mRegion = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07))
         self.mapView.setRegion(mRegion, animated: true)
-        let mkAnnotation: MKPointAnnotation = MKPointAnnotation()
-        mkAnnotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-        mkAnnotation.title = self.setUsersClosestLocation(mLattitude: location.latitude, mLongitude: location.longitude)
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.addAnnotation(mkAnnotation)
+        addAnnotation(location: location)
     }
 
     func setUsersClosestLocation(mLattitude: CLLocationDegrees, mLongitude: CLLocationDegrees) -> String {
@@ -122,38 +111,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
         annotation.title = self.setUsersClosestLocation(mLattitude: location.latitude, mLongitude: location.longitude)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
+        
+        self.mapInformationView.latitudeData.text = String(format: "%0.5f" ,location.latitude)
+        self.mapInformationView.longitudeData.text = String(format: "%0.5f" ,location.longitude)
+        
+        mapInformationView.getNewWeatherData(lat: location.latitude, lon: location.longitude)
     }
 }
 
 extension MapViewController: MKMapViewDelegate{
 
-func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
 
-    let reuseId = "pin"
-    var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
 
-    if pinView == nil {
-        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        pinView!.canShowCallout = true
-        pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
-        pinView!.pinTintColor = UIColor.black
-    }
-    else {
-        pinView!.annotation = annotation
-    }
-    return pinView
-}
-
-func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    print("tapped on pin ")
-}
-
-func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    if control == view.rightCalloutAccessoryView {
-        if let doSomething = view.annotation?.title! {
-           print("do something")
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
+            pinView!.pinTintColor = UIColor.black
         }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
     }
-  }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("tapped on pin ")
+    }
+
+
 }

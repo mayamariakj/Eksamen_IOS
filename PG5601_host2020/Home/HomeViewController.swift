@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     
     @IBOutlet var homeView: HomeView!
     
+    public var itemIndex: Int = 0
     
     var locationManager: CLLocationManager!
     var currentLocationStrLat = myLocationLat
@@ -23,14 +24,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     var umbrella = false
     var updateTimeText = ""
     var easterEggtoggle = true
+    var date: Date = Date()
     
      let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        determineCurrentLocation()
-        makeRequest()
         updateUiElements()
         
         self.homeView.image.isUserInteractionEnabled = true
@@ -38,16 +38,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        determineCurrentLocation()
-        makeRequest()
         updateUiElements()
     }
     
     func updateUiElements(){
-        self.homeView.dayLabel.text = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
+        self.homeView.dayLabel.text = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
         self.homeView.image.image = setCorrectImage()
         self.homeView.messageLabel.text = setCorrectUmbrellaText()
         self.homeView.updateTimeLabel.text = "Last Updated: \(updateTimeText)"
+        
+        
     }
     
     func setCorrectImage() -> UIImage {
@@ -61,59 +61,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     func setCorrectUmbrellaText() -> String {
         return umbrella ? "It's going to rain today, bring an umbrella." : "You dont need a umbrella today, its sunnshine and butterflies!"
     }
-    
-    func makeRequest() {
-    /*
-        let weatherUrl : String =  "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=\(currentLocationStrLat)&lon=\(currentLocationStrLon)"
-        
-        RequestHandler().requestWeaterData(
-            url: weatherUrl,
-            completed: {(response: MetWeatherObject?) in guard let weatherData = response?.properties.timeseries[0].data else {
-                return;
-            }
-            
-            if((weatherData.next12_Hours!.summary.symbolCode.contains("rain")) || (weatherData.next12_Hours!.summary.symbolCode.contains("sleet"))){
-                self.umbrella = true
-            }
-            else {
-                self.umbrella = false
-            }
-                
-            //https://stackoverflow.com/questions/46376823/ios-swift-get-the-current-local-time-and-date-timestamp
-            let formatter = DateFormatter()
-            formatter.timeZone = TimeZone.current
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
-            self.updateTimeText = formatter.string(from: Date())
-            
-            self.updateUiElements()
-
-            print("finished")
-        })
-        */
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-         print("Error - locationManager: \(error.localizedDescription)")
-     }
-
-     func determineCurrentLocation() {
-         locationManager = CLLocationManager()
-         locationManager.delegate = self
-         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-         locationManager.requestAlwaysAuthorization()
-
-         if CLLocationManager.locationServicesEnabled() {
-             locationManager.startUpdatingLocation()
-         }
-     }
-     
-     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-         let mUserLocation:CLLocation = locations[0] as CLLocation
-        currentLocationStrLat = mUserLocation.coordinate.latitude
-        currentLocationStrLon = mUserLocation.coordinate.longitude
-
-      
-     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
