@@ -1,10 +1,3 @@
-//
-//  MapInformationCell.swift
-//  PG5601_host2020
-//  https://blog.usejournal.com/custom-uiview-in-swift-done-right-ddfe2c3080a
-//  Created by Maya maria Kjær on 13/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//
 import Foundation
 import UIKit
 
@@ -122,7 +115,6 @@ extension MapInformationView: MetRequestDelegate {
         metRequest.getWeatherDataFromMet(lat: lat, lon: lon)
     }
     
-    //https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
     func couldNotGetWeatherData(){
         let alert = UIAlertController(title: "Unable to get weather data.", message: "Check your internet conection.", preferredStyle: .alert)
 
@@ -137,7 +129,6 @@ extension MapInformationView: MetRequestDelegate {
 
 extension UIResponder {
     
-    // https://ask.xiaolee.net/questions/1078854
     func parentController<T: UIViewController>(of type: T.Type) -> T? {
         guard let next = self.next else {
             return nil

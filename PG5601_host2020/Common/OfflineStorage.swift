@@ -1,12 +1,3 @@
-//
-//  OfflineStorage.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 29/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//https://stackoverflow.com/questions/50790702/how-do-i-make-json-data-persistent-for-offline-use-swift-4/50792836
-//https://programmingwithswift.com/how-to-save-json-to-file-with-swift/
-
 import Foundation
 
 class OfflineStorage {
@@ -22,21 +13,17 @@ class OfflineStorage {
 
             if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let pathWithFilename = documentDirectory.appendingPathComponent(fileName)
-                do {
-                    try jsonString!.write(to: pathWithFilename, atomically: true, encoding: .utf8)
-                } catch {
-                    print("error in file write")
-                }
+                
+                try jsonString!.write(to: pathWithFilename, atomically: true, encoding: .utf8)
             }
         }catch{
-            
+            print("error in file write")
         }
     }
     
     func readWeatherDataFromFile() -> MetWeatherObject? {
         
         if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-
             do {
                 let pathWithFilename = documentDirectory.appendingPathComponent(fileName)
                 let jsonData = try Data(contentsOf: pathWithFilename, options: .mappedIfSafe)
@@ -44,10 +31,9 @@ class OfflineStorage {
                 
                 return weatherData
             } catch {
-                print(error)
+                print("error in file read")
             }
         }
         return nil
     }
-    
 }

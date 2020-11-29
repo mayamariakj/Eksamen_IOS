@@ -1,16 +1,6 @@
-//
-//  homeViewController.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 04/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//
-
 import UIKit
 import Foundation
 import CoreLocation
-
-
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
@@ -25,9 +15,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITextFie
     var updateTimeText = ""
     var easterEggtoggle = true
     var date: Date = Date()
-    
-     let cellReuseIdentifier = "cell"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         

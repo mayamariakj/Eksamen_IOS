@@ -1,11 +1,3 @@
-//
-//  MainMenuHeader.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 02/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-// swift documentation
-
 import Foundation
 import UIKit
 
@@ -29,8 +21,6 @@ class MainMenuHeader: UITableViewHeaderFooterView {
         contentView.addSubview(title)
         contentView.addSubview(subtitle)
 
-
-       
         NSLayoutConstraint.activate([
            
             title.heightAnchor.constraint(equalToConstant: 30),
@@ -39,7 +29,6 @@ class MainMenuHeader: UITableViewHeaderFooterView {
             subtitle.heightAnchor.constraint(equalToConstant: 30),
             subtitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             subtitle.topAnchor.constraint(equalTo: title.bottomAnchor)
-
         ])
     }
 }

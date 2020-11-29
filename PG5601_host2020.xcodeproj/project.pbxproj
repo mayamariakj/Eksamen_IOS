@@ -23,7 +23,6 @@
 		AFBF377725507958007EF87F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377625507958007EF87F /* MapViewController.swift */; };
 		AFBF377925532F04007EF87F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377825532F04007EF87F /* HomeViewController.swift */; };
 		AFBF377B255333C8007EF87F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF377A255333C8007EF87F /* HomeView.swift */; };
-		AFC76AB7255810CD00F2FA42 /* weathericon in Resources */ = {isa = PBXBuildFile; fileRef = AFC76AB6255810CD00F2FA42 /* weathericon */; };
 		AFC76ABC255EF6D100F2FA42 /* MapInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ABB255EF6D100F2FA42 /* MapInformationView.swift */; };
 		AFC76AC0256AA5C200F2FA42 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ABF256AA5C200F2FA42 /* HomePageViewController.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		AFBF377625507958007EF87F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AFBF377825532F04007EF87F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AFBF377A255333C8007EF87F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		AFC76AB6255810CD00F2FA42 /* weathericon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weathericon; sourceTree = SOURCE_ROOT; };
 		AFC76ABB255EF6D100F2FA42 /* MapInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInformationView.swift; sourceTree = "<group>"; };
 		AFC76ABF256AA5C200F2FA42 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		CDB9152A47B3E53F3151F654 /* Pods-PG5601_host2020.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PG5601_host2020.debug.xcconfig"; path = "Target Support Files/Pods-PG5601_host2020/Pods-PG5601_host2020.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				AFC76ABA25583FE100F2FA42 /* Common */,
 				AFC76AB925583F5D00F2FA42 /* Forecast */,
 				AFC76AB825583F4C00F2FA42 /* Home */,
-				AFC76AB6255810CD00F2FA42 /* weathericon */,
 				AFBF3754254EE671007EF87F /* AppDelegate.swift */,
 				AFBF3756254EE671007EF87F /* SceneDelegate.swift */,
 				AFBF375A254EE671007EF87F /* Main.storyboard */,
@@ -219,7 +216,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFC76AB7255810CD00F2FA42 /* weathericon in Resources */,
 				AFBF3761254EE672007EF87F /* LaunchScreen.storyboard in Resources */,
 				AFBF375E254EE672007EF87F /* Assets.xcassets in Resources */,
 				AFBF375C254EE671007EF87F /* Main.storyboard in Resources */,

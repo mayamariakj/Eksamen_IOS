@@ -1,13 +1,3 @@
-//
-//  MapViewController.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 02/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//https://stackoverflow.com/questions/47987473/addressdictionary-is-deprecated-first-deprecated-in-ios-11-0-use-properties
-//https://stackoverflow.com/questions/34431459/ios-swift-how-to-add-pinpoint-to-map-on-touch-and-get-detailed-address-of-th
-// https://medium.com/@kiransjadhav111/corelocation-map-kit-get-the-users-current-location-set-a-pin-in-swift-edb12f9166b2
-
 import Foundation
 import UIKit
 import MapKit
@@ -16,7 +6,6 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate{
     
     var locationManager: CLLocationManager!
-    var currentLocationStr = "Current location"
     var currentLocation: CLLocationCoordinate2D!
     var pinLocation: CLLocationCoordinate2D!
     
@@ -44,7 +33,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error - locationManager: \(error.localizedDescription)")
     }
@@ -66,7 +54,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
         
         centerUserOnLocationAndAddPin(location: center)
         currentLocation = center
-        //set The Coordinats For weather screen.
         setWeatherCoordinates(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
     }
     
@@ -75,36 +62,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
         self.mapView.setRegion(mRegion, animated: true)
         addAnnotation(location: location)
     }
-
-    func setUsersClosestLocation(mLattitude: CLLocationDegrees, mLongitude: CLLocationDegrees) -> String {
-        let location = CLLocation(latitude: mLattitude, longitude: mLongitude)
-       
-       
-            let geocoder = CLGeocoder()
-           geocoder.reverseGeocodeLocation(location) { (placemarksArray, error) in
-              // print(placemarksArray!)
-               if (error) == nil {
-                   if placemarksArray!.count > 0 {
-                       let placemark = placemarksArray?[0]
-                       let address = "\(placemark?.subThoroughfare ?? ""), \(placemark?.thoroughfare ?? ""), \(placemark?.locality ?? ""), \(placemark?.subLocality ?? ""), \(placemark?.administrativeArea ?? ""), \(placemark?.postalCode ?? ""), \(placemark?.country ?? "")"
-                       print("\(address)")
-                   }
-               }
-
-           }
-       
-        return currentLocationStr
-    }
     
     @objc func mapTap(sender: UIGestureRecognizer){
-        print("maptap")
         if sender.state == .ended {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            addAnnotation(location: locationOnMap)
-            print("setting location")
-            pinLocation = locationOnMap
             
+            addAnnotation(location: locationOnMap)
+            pinLocation = locationOnMap
             userPinSwitch.setOn(false, animated: true)
         }
     }
@@ -112,7 +77,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     func addAnnotation(location: CLLocationCoordinate2D){
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = self.setUsersClosestLocation(mLattitude: location.latitude, mLongitude: location.longitude)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
         
@@ -142,10 +106,4 @@ extension MapViewController: MKMapViewDelegate{
         }
         return pinView
     }
-
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("tapped on pin ")
-    }
-
-
 }

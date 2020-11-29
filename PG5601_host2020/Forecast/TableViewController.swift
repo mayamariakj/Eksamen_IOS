@@ -1,14 +1,5 @@
-//
-//  ViewController.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 01/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//
-
 import UIKit
 import Foundation
-
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,9 +7,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var weatherTable: UITableView!
     
     var weatherDataList : [WeatherInformation] = []
-    
     let cellReuseIdentifier = "cell"
-    
     let metRequest = MetRequest()
     
     override func viewDidLoad() {
@@ -38,26 +27,23 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // F I X !! maybe change to an dictinonary :)
         weatherDataList.removeAll()
         metRequest.getWeatherDataFromMet(lat: myLocationLat,lon: myLocationLong)
     }
     
     func formatWeatherData(weatherData :DataClass){
         weatherDataList.append(WeatherInformation(title: "Now", informationLable: "Temperature", datafield_0: "\(weatherData.instant.details.airTemperature)°C", datafield_1: ""))
-        weatherDataList.append(WeatherInformation(title: "Next Hour", informationLable: "Weather", datafield_0: "\(weatherData.next1_Hours?.details.precipitationAmount ?? 0) mm" , datafield_1: weatherData.next1_Hours?.summary.symbolCode ?? "SORRY MAC"))
-        weatherDataList.append(WeatherInformation(title: "Next Six hours", informationLable: "Weather", datafield_0: "\(weatherData.next6_Hours?.details.precipitationAmount ?? 0) mm" , datafield_1: weatherData.next6_Hours?.summary.symbolCode ?? "SORRY MAC"))
-        weatherDataList.append(WeatherInformation(title: "Next Twelve hours", informationLable: "Weather", datafield_0: "" , datafield_1: weatherData.next12_Hours?.summary.symbolCode ?? "SORRY MAC"))
+        weatherDataList.append(WeatherInformation(title: "Next Hour", informationLable: "Weather", datafield_0: "\(weatherData.next1_Hours?.details.precipitationAmount ?? 0) mm" , datafield_1: weatherData.next1_Hours?.summary.symbolCode ?? "not found"))
+        weatherDataList.append(WeatherInformation(title: "Next Six hours", informationLable: "Weather", datafield_0: "\(weatherData.next6_Hours?.details.precipitationAmount ?? 0) mm" , datafield_1: weatherData.next6_Hours?.summary.symbolCode ?? "not found"))
+        weatherDataList.append(WeatherInformation(title: "Next Twelve hours", informationLable: "Weather", datafield_0: "" , datafield_1: weatherData.next12_Hours?.summary.symbolCode ?? "not found"))
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let view = self.weatherTable.dequeueReusableHeaderFooterView(withIdentifier:
-                   "sectionHeader") as! MainMenuHeader
+        let view = self.weatherTable.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! MainMenuHeader
         view.title.text = "Weather forecast for"
         view.subtitle.text = myLocationName
-
-       return view
+        return view
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,7 +52,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weatherDataList.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,14 +68,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
-    
 }
 
 extension TableViewController: MetRequestDelegate {
-    func couldNotGetWeatherData() {
-        
-    }
+    
+    func couldNotGetWeatherData() {}
     
     func didGetWeatherData(_ response: MetWeatherObject) {
         
@@ -101,5 +83,3 @@ extension TableViewController: MetRequestDelegate {
         }
     }
 }
-
-

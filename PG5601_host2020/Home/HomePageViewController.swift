@@ -1,12 +1,3 @@
-//
-//  HomePageViewController.swift
-//  PG5601_host2020
-//
-//  Created by Maya maria Kjær on 22/11/2020.
-//  Copyright © 2020 Maya maria Kjær. All rights reserved.
-// https://medium.com/@GhostLarsen/using-a-uipageviewcontroller-in-swift-4-part-1-41ae631394d6
-// https://stackoverflow.com/questions/5067785/how-do-i-add-1-day-to-an-nsdate
-
 import Foundation
 import UIKit
 import CoreLocation
@@ -76,17 +67,12 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
             weekDayInformationList.append(newDay)
             
             nextDate = calendar.date(byAdding: dayComponent, to: nextDate)!
-            
-            print("looking for: " + metDf.string(from: nextDate) + "T00:00:00Z")
-            
+                        
             singelDayWeatherData = guaderdWeatherData.first(where: {
                 $0.time == (metDf.string(from: nextDate) + "T00:00:00Z")
             })
             
-            
-            print("found: " + (singelDayWeatherData?.time ?? "nothing"))
         }
-        print("finish with date")
         
         if weekDayInformationList.count < 1 {
             let newDay = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -103,7 +89,6 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
         }
         
         setupPageController()
-        
     }
     
     private func setupPageController() {
