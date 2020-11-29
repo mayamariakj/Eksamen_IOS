@@ -88,6 +88,10 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 extension TableViewController: MetRequestDelegate {
+    func couldNotGetWeatherData() {
+        
+    }
+    
     func didGetWeatherData(_ response: MetWeatherObject) {
         
         let weatherData = response.properties.timeseries[0].data

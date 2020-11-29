@@ -22,6 +22,7 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
     private var weekDayInformationList: [HomeViewController] = []
     
     let metRequest = MetRequest()
+    let offlineStorage = OfflineStorage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +32,23 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
         self.delegate = self
         
         determineCurrentLocation()
-        //setUpPages()
-
-        //setupPageController()
     }
     
     private func setUpPages(){
-//        check internett conection TODO:
         let metDf = DateFormatter()
         let updateDf = DateFormatter()
-        updateDf.dateFormat = "yyyy-MM-dd hh:mm"
+        updateDf.dateFormat = "yyyy-MM-dd HH:mm"
         metDf.dateFormat = "yyyy-MM-dd"
         
         var dayComponent = DateComponents()
         dayComponent.day = 1
         let calendar = Calendar.current
         var nextDate = Date()
+
+        guard let updateDate = weatherData?.updateTime else {
+            print("failed to get weatherdata")
+            return
+        }
 
         guard let guaderdWeatherData = weatherData?.properties.timeseries else {
             print("failed to get weatherdata")
@@ -55,13 +57,15 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
         
         weekDayInformationList.removeAll()
         
-        var singelDayWeatherData: Timesery? = guaderdWeatherData[0]
+        var singelDayWeatherData: Timesery? = guaderdWeatherData.first(where: {
+            $0.time.contains(metDf.string(from: nextDate))
+        })
         
-        while singelDayWeatherData != nil {
+        while singelDayWeatherData != nil && weekDayInformationList.count < 8 {
             
             let newDay = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
             newDay.date = nextDate
-            newDay.updateTimeText = updateDf.string(from: nextDate)
+            newDay.updateTimeText = updateDf.string(from: updateDate)
             
             if((singelDayWeatherData!.data.next12_Hours!.summary.symbolCode.contains("rain")) || (singelDayWeatherData!.data.next12_Hours!.summary.symbolCode.contains("sleet")) ){
                 newDay.umbrella = true
@@ -83,6 +87,20 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
             print("found: " + (singelDayWeatherData?.time ?? "nothing"))
         }
         print("finish with date")
+        
+        if weekDayInformationList.count < 1 {
+            let newDay = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            newDay.date = Date()
+            newDay.updateTimeText = "NO DATA IN STORAGE"
+            newDay.umbrella = true
+            weekDayInformationList.append(newDay)
+            
+            let alert = UIAlertController(title: "Unable to get weather data.", message: "No offline data found. Check your internet conection.", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+            self.present(alert,animated: true)
+        }
         
         setupPageController()
         
@@ -133,8 +151,16 @@ class HomePageViewController: UIPageViewController, CLLocationManagerDelegate {
 
 extension HomePageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate, MetRequestDelegate {
     
+    func couldNotGetWeatherData() {
+        weatherData = offlineStorage.readWeatherDataFromFile()
+        DispatchQueue.main.async {
+            self.setUpPages()
+        }
+    }
+    
     func didGetWeatherData(_ response: MetWeatherObject) {
         weatherData = response
+        offlineStorage.writeWeatherDataToFile(weatherData: response)
         DispatchQueue.main.async {
             self.setUpPages()
         }

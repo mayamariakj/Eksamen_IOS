@@ -39,7 +39,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     @objc func pinSwitchChanged(pinSwitch: UISwitch){
         if pinSwitch.isOn {
             centerUserOnLocationAndAddPin(location: currentLocation)
-        }else{
+        }else if pinLocation != nil{
             centerUserOnLocationAndAddPin(location: pinLocation)
         }
     }
@@ -78,10 +78,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
 
     func setUsersClosestLocation(mLattitude: CLLocationDegrees, mLongitude: CLLocationDegrees) -> String {
         let location = CLLocation(latitude: mLattitude, longitude: mLongitude)
-        
-       let geocoder = CLGeocoder()
+       
+       
+            let geocoder = CLGeocoder()
            geocoder.reverseGeocodeLocation(location) { (placemarksArray, error) in
-               print(placemarksArray!)
+              // print(placemarksArray!)
                if (error) == nil {
                    if placemarksArray!.count > 0 {
                        let placemark = placemarksArray?[0]
@@ -91,6 +92,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
                }
 
            }
+       
         return currentLocationStr
     }
     
@@ -102,6 +104,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
             addAnnotation(location: locationOnMap)
             print("setting location")
             pinLocation = locationOnMap
+            
+            userPinSwitch.setOn(false, animated: true)
         }
     }
 

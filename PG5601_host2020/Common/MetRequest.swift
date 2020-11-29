@@ -4,13 +4,13 @@
 //
 //  Created by Maya maria Kjær on 01/11/2020.
 //  Copyright © 2020 Maya maria Kjær. All rights reserved.
-//
 
 import Foundation
 import Alamofire
 
 protocol MetRequestDelegate {
     func didGetWeatherData(_ weatherData: MetWeatherObject)
+    func couldNotGetWeatherData()
 }
 
 class MetRequest {
@@ -21,24 +21,35 @@ class MetRequest {
         
         let weatherUrl : String =  "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=\(String(lat))&lon=\(String(lon))"
         
+        if !NetworkReachabilityManager()!.isReachable {
+            self.delegate?.couldNotGetWeatherData()
+            return
+        }
+        
         AF.request(weatherUrl)
           .validate(statusCode: 200..<300)
           .validate(contentType: ["application/json"])
           .responseJSON(queue: DispatchQueue.init(label: "Background"))
-          { response in
+          {
+            (response) in
+            
             guard let data = response.data else {return};
             guard let _ = response.value else {return};
             
             if let statusCode = response.error?.responseCode {
               print("Error with status code: \(statusCode)");
+              self.delegate?.couldNotGetWeatherData()
+                return
             }
             
             do {
-                let weatherData = try JSONDecoder().decode(MetWeatherObject.self, from: data)
+                var weatherData = try JSONDecoder().decode(MetWeatherObject.self, from: data)
+                weatherData.updateTime = Date()
                 self.delegate?.didGetWeatherData(weatherData)
                 
             } catch let error {
-              print(error)
+                print(error)
+                self.delegate?.couldNotGetWeatherData()
             }
         }
     }

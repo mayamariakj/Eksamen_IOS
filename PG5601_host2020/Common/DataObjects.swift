@@ -20,6 +20,7 @@ func setWeatherCoordinates(latitude:CLLocationDegrees, longitude:CLLocationDegre
 
 // MARK: - Welcome
 struct MetWeatherObject: Codable {
+   var updateTime: Date?
    let type: String
    let properties: Properties
 }

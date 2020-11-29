@@ -121,4 +121,27 @@ extension MapInformationView: MetRequestDelegate {
     func getNewWeatherData(lat: Double, lon: Double){
         metRequest.getWeatherDataFromMet(lat: lat, lon: lon)
     }
+    
+    //https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
+    func couldNotGetWeatherData(){
+        let alert = UIAlertController(title: "Unable to get weather data.", message: "Check your internet conection.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+        DispatchQueue.main.async {
+            let parentController = self.parentController(of: MapViewController.self)
+            parentController?.present(alert,animated: true)
+        }
+    }
+}
+
+extension UIResponder {
+    
+    // https://ask.xiaolee.net/questions/1078854
+    func parentController<T: UIViewController>(of type: T.Type) -> T? {
+        guard let next = self.next else {
+            return nil
+        }
+        return (next as? T) ?? next.parentController(of: T.self)
+    }
 }
